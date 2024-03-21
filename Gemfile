@@ -29,6 +29,10 @@ gem "jbuilder"
 # Look up a map address and convert it to latitude, longitude, etc.
 gem "geocoder"
 
+# Simple flexible HTTP client library, with support for multiple backends.
+gem "faraday"
+gem "faraday_middleware"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 

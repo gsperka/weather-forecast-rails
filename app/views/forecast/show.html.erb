@@ -6,3 +6,21 @@
     <%= form.submit "Get Forecast" %>
   <% end %>
 </div>
+
+  <% if @forecasts %>
+    <h1 class="text-center">Forecast:</h1>
+    <div class="forecasts">
+      <% @forecasts.each do |forecast| %>
+        <div class="forecast">
+          <p>Date: <%= forecast.date %></p>
+          <p>Temperature: <%= forecast.temperature%> °F</p>
+          <p>Temperature Minimum: <%= forecast.temperature_min %>°F</p>
+          <p>Temperature Maximum: <%= forecast.temperature_max %>°F</p>
+          <p>Humidity: <%= forecast.humidity %>%</p>
+          <p>Pressure: <%= forecast.pressure %> millibars</p>
+          <p>Description: <%= forecast.description %></p>
+          <p>Is this result from the cache? <%= @forecast_cache_key_exist %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
