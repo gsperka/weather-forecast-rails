@@ -1,0 +1,19 @@
+.form-data {
+  max-width: 500px;
+  margin: 50px auto 0px auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form-data #address {
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+  height: 30px;
+}
+
+.form-data form {
+  display: flex;
+}

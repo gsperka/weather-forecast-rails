@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["field", "latitude", "longitude"];
+  static targets = ["field"];
 
   connect() {
     if (typeof(google) != undefined) {
@@ -23,8 +23,11 @@ export default class extends Controller {
       window.alert(`No details are available for input:" ${place.name}`)
       return;
     }
-    
-    this.latitudeTarget.value = place.geometry.location.lat();
-    this.longitudeTarget.value = place.geometry.location.lng();
+  }
+
+  keydown(event) {
+    if (event.key == "Enter") {
+      event.preventDefault();
+    }
   }
 }
