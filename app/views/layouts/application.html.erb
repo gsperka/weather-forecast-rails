@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Weather</title>
+    <title>Weather Forecast</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=<%= Rails.application.credentials[:google_geocode_api_key] %>&loading=async"></script>
   </head>
 
   <body>

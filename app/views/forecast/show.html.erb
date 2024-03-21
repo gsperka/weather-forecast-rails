@@ -1,0 +1,9 @@
+<div data-controller="forecast">
+  <h1>What is the weather forecast near you?</h1>
+
+  <%= form_with(method: 'get', local: true) do |form| %>
+    <%= form.search_field :address, data: {forecast_target: "field"} %>
+    <%= form.hidden_field :latitude, data: {forecast_target: "latitude"} %>
+    <%= form.hidden_field :longitude, data: {forecast_target: "longitude"} %>
+  <% end %>
+</div>
