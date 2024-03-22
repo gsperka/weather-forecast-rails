@@ -29,7 +29,7 @@ gem "jbuilder"
 # Look up a map address and convert it to latitude, longitude, etc.
 gem "geocoder"
 
-# Simple flexible HTTP client library, with support for multiple backends.
+# HTTP client library
 gem "faraday"
 gem "faraday_middleware"
 
@@ -71,4 +71,5 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem "faker"
 end

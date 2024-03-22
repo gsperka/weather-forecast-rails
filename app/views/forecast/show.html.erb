@@ -1,3 +1,5 @@
+<%= render "shared/flash" %>
+
 <div class="form-data" data-controller="forecast">
   <h1>Get weather forecast for a location</h1>
 
@@ -19,7 +21,7 @@
           <p>Humidity: <%= forecast.humidity %>%</p>
           <p>Pressure: <%= forecast.pressure %> millibars</p>
           <p>Description: <%= forecast.description %></p>
-          <p>Is this result from the cache? <%= @forecast_cache_key_exist %>
+          <p>From cache? <%= @forecast_cache_key_exist %>
         </div>
       <% end %>
     </div>
