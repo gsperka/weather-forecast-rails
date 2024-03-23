@@ -72,5 +72,4 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "faker"
-  gem 'rspec', '~> 3.4'
 end
