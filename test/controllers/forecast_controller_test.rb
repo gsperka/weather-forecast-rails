@@ -8,4 +8,9 @@ class ForecastControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "show throws a flash error message with an invalid input address" do
+    address = Faker::Address.full_address
+    get '/', params: { address: address }
+    assert_equal 'Geocoder is empty: []', flash[:alert]
+  end
 end

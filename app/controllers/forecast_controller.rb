@@ -4,13 +4,14 @@ class ForecastController < ApplicationController
 
     if @address
       begin
-      @geocode = GenerateCoordinatesService.new(@address)
-      @forecast_cache_key = "#{@geocode.cache_key}"
-      @forecast_cache_key_exist = Rails.cache.exist?(@forecast_cache_key)
-      @forecasts = Rails.cache.fetch(@forecast_cache_key, expires_in: 30.minutes) do
-        PopulateForecastService.new(@geocode.latitude, @geocode.longitude).forecasts          
-      end
-      
+        @geocode = GeocoderService.new(@address)
+        @forecast_cache_key = "#{@geocode.cache_key}"
+        @forecast_cache_key_exist = Rails.cache.exist?(@forecast_cache_key)
+        @forecasts = Rails.cache.fetch(@forecast_cache_key, expires_in: 30.minutes) do
+          ForecastService.new(@geocode.latitude, @geocode.longitude).forecasts          
+        end
+        flash.clear 
+
       rescue => e
         flash.alert = e.message
       end

@@ -1,6 +1,6 @@
-require 'date'
+require 'time'
 
-class PopulateForecastService
+class ForecastService
   attr_reader :forecasts
 
   def initialize(latitude, longitude)
@@ -21,7 +21,7 @@ class PopulateForecastService
     parse_response(today.body)
 
     tomorrow = get_tomorrow_weather(conn)
-    parse_response(tomorrow.body['list'].last)
+    parse_response(tomorrow.body['list'].last) # this list contains 8 3-hour forecasts and we want the last one for tomorrow
 
     @forecasts
   end
@@ -92,8 +92,7 @@ class PopulateForecastService
     @forecasts << forecast
   end
 
-  def format_date(time)
-    from_unix = DateTime.strptime(time.to_s ,'%s')
-    from_unix.strftime("%m/%d/%Y")
+  def format_date(unix_time)
+    Time.at(unix_time).strftime("%m/%d/%Y")
   end
 end

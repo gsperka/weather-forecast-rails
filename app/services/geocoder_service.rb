@@ -1,4 +1,4 @@
-class GenerateCoordinatesService
+class GeocoderService
   attr_reader :address, :latitude, :longitude, :cache_key
 
   def initialize(address)
@@ -27,6 +27,8 @@ class GenerateCoordinatesService
   private 
 
   def set_cache_key(data)
+    # in some instances, postcode does not come back from the ESRI ArcGIS API
+    # if that is the case, use the place_id which is unique and always comes back
     if data["address"]["postcode"]
       return data["address"]["postcode"]
     else
