@@ -14,7 +14,7 @@
     <div class="forecasts">
       <% @forecasts.each do |forecast| %>
         <div class="forecast">
-          <p>Date: <%= forecast.date %></p>
+          <p>Time: <%= forecast.day %></p>
           <p>Temperature: <%= forecast.temperature%> °F</p>
           <p>Temperature Minimum: <%= forecast.temperature_min %>°F</p>
           <p>Temperature Maximum: <%= forecast.temperature_max %>°F</p>

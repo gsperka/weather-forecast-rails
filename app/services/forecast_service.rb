@@ -18,10 +18,10 @@ class ForecastService
     end    
 
     today = get_current_weather(conn)
-    parse_response(today.body)
+    parse_response(today.body, "Current")
 
     tomorrow = get_tomorrow_weather(conn)
-    parse_response(tomorrow.body['list'].last) # this list contains 8 3-hour forecasts and we want the last one for tomorrow
+    parse_response(tomorrow.body['list'].last, "Tomorrow") # this list contains 8 3-hour forecasts and we want the last one for tomorrow
 
     @forecasts
   end
@@ -47,13 +47,13 @@ class ForecastService
     })
   end
 
-  def parse_response(response)
+  def parse_response(response, day)
     validate_response(response)
     validate_main(response)
     validate_temp(response)
     validate_weather(response)
     validate_date(response)
-    create_forecast(response)
+    create_forecast(response, day)
   end
     
   def validate_response(response)
@@ -80,19 +80,15 @@ class ForecastService
     response["weather"][0]["description"] or raise IOError.new "OpenWeather weather description is missing"
   end
  
-  def create_forecast(weather_data)
+  def create_forecast(weather_data, day)
     forecast = OpenStruct.new
     forecast.temperature = weather_data["main"]["temp"]
     forecast.temperature_min = weather_data["main"]["temp_min"]
     forecast.temperature_max = weather_data["main"]["temp_max"]
     forecast.humidity = weather_data["main"]["humidity"]
     forecast.pressure = weather_data["main"]["pressure"]
-    forecast.date = format_date(weather_data["dt"])
+    forecast.day = day
     forecast.description = weather_data["weather"][0]["description"]
     @forecasts << forecast
-  end
-
-  def format_date(unix_time)
-    Time.at(unix_time).strftime("%m/%d/%Y")
   end
 end
