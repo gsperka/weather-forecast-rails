@@ -87,13 +87,18 @@ class ForecastService
     forecast.temperature_max = weather_data["main"]["temp_max"]
     forecast.humidity = weather_data["main"]["humidity"]
     forecast.pressure = weather_data["main"]["pressure"]
-    forecast.date = format_date(weather_data["dt"])
+    forecast.date = format_date(weather_data)
     forecast.description = weather_data["weather"][0]["description"]
     @forecasts << forecast
   end
 
-  def format_date(unix_time)
-    offset = Time.now.gmt_offset
-    unix = Time.at(unix_time + offset).strftime("%m/%d/%Y")
+  def format_date(weather_data)
+    # The OpenWeather API is inconsistent in their data.
+    # The current API does not return a dt_txt attibute while 5 day forecast does
+    if weather_data['dt_txt']
+      Time.parse(weather_data['dt_txt']).strftime("%m/%d/%Y")
+    else 
+      Time.now.strftime("%m/%d/%Y")
+    end
   end
 end
