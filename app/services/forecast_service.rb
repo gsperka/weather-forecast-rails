@@ -93,7 +93,7 @@ class ForecastService
   end
 
   def format_date(unix_time)
-    unix = Time.at(unix_time)
-    unix.localtime().strftime("%m/%d/%Y")
+    offset = Time.now.gmt_offset
+    unix = Time.at(unix_time + offset).strftime("%m/%d/%Y")
   end
 end
