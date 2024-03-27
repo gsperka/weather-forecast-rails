@@ -16,15 +16,17 @@ class GeocoderService
     validate_response(response)
     data = parse_response(response)
     populate_coordinates(data)
+    populate_cache_key(data)
   end
   
   def populate_coordinates(data)
     @latitude = data["lat"].to_f
     @longitude = data["lon"].to_f
-    @cache_key = set_cache_key(data)
   end
 
-  private 
+  def populate_cache_key(data)
+    @cache_key = set_cache_key(data)
+  end
 
   def set_cache_key(data)
     # in some instances, postcode does not come back from the ESRI ArcGIS API

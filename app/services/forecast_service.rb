@@ -42,7 +42,7 @@ class ForecastService
       appid: Rails.application.credentials.openweather_api_key,
       lat: @latitude,
       lon: @longitude,
-      cnt: 8,  # a count of 8 includes data for tomorrow
+      cnt: 8,  # a count of 8 includes data for tomorrow: 8 x 3 (hour interval) = 24
       units: "imperial"
     })
   end
@@ -94,7 +94,7 @@ class ForecastService
 
   def format_date(weather_data)
     # The OpenWeather API is inconsistent in their data.
-    # The current API does not return a dt_txt attibute while 5 day forecast does
+    # The current API does not return a dt_txt attibute while the five day forecast does
     if weather_data['dt_txt']
       Time.parse(weather_data['dt_txt']).strftime("%m/%d/%Y")
     else 
